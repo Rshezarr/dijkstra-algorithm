@@ -15,46 +15,18 @@ func main() {
 }
 
 func djk(table [][]int, start int, dest int) []int {
-	index, val1 := findMin(table[start], 0)
-	fmt.Println(index)
-	fmt.Println(val1)
-	fmt.Println("=============")
-	if index == dest {
-		fmt.Println("first check")
-		return []int{4, 0, 9, 3}
+	var index int = start
+	var value int
+	var sum int
+	var path []int
+
+	for index != dest {
+		index, value = findMin(table[index], value)
+		sum += value
+		path = append(path, sum)
 	}
 
-	new2, val2 := findMin(table[index], val1)
-	fmt.Println(new2)
-	fmt.Println(val2)
-	fmt.Println("=============")
-
-	if new2 == dest {
-		fmt.Println("sec check")
-		return []int{4, 0, 9, 3}
-	}
-
-	new3, val3 := findMin(table[new2], val2)
-	fmt.Println(new3)
-	fmt.Println(val3)
-	fmt.Println("=============")
-
-	if new3 == dest {
-		fmt.Println("third check")
-		fmt.Println(table[new2])
-		return []int{4, 0, 9, 3}
-	}
-
-	new4, _ := findMin(table[new3], val3)
-	fmt.Println(new4)
-	fmt.Println("=============")
-
-	if new4 == dest {
-		fmt.Println("last check")
-		return []int{4, 0, 9, 3}
-	}
-
-	return nil
+	return path
 }
 
 func findMin(node []int, prev int) (int, int) {
