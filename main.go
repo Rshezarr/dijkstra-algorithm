@@ -32,7 +32,7 @@ func djk(table [][]int, start int, dest int) ([]int, error) {
 	var err error
 
 	for index != dest {
-		index, value, err = findMin(table[index], value)
+		index, value, err = findMinWeight(table[index], value)
 		if err != nil {
 			return nil, err
 		}
@@ -43,7 +43,7 @@ func djk(table [][]int, start int, dest int) ([]int, error) {
 	return path, nil
 }
 
-func findMin(node []int, prev int) (int, int, error) {
+func findMinWeight(node []int, prev int) (int, int, error) {
 	index := 0
 	val := 0
 	for i, v := range node {
