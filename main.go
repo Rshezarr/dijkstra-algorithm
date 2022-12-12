@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"log"
+)
 
 func main() {
 	table := [][]int{
@@ -11,25 +15,35 @@ func main() {
 		{0, 0, 0, 6, 0, 9},
 		{14, 0, 2, 0, 9, 0},
 	}
-	fmt.Println(djk(table, 0, 5))
+	res, err := djk(table, 0, 5)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	fmt.Println(res)
 }
 
-func djk(table [][]int, start int, dest int) []int {
+func djk(table [][]int, start int, dest int) ([]int, error) {
 	var index int = start
 	var value int
 	var sum int
 	var path []int
+	var err error
 
 	for index != dest {
-		index, value = findMin(table[index], value)
+		index, value, err = findMin(table[index], value)
+		if err != nil {
+			return nil, err
+		}
 		sum += value
 		path = append(path, sum)
 	}
 
-	return path
+	return path, nil
 }
 
-func findMin(node []int, prev int) (int, int) {
+func findMin(node []int, prev int) (int, int, error) {
 	index := 0
 	val := 0
 	for i, v := range node {
@@ -41,6 +55,10 @@ func findMin(node []int, prev int) (int, int) {
 	}
 
 	for i := index; i < len(node); i++ {
+		if node[i] < 0 {
+			return 0, 0, errors.New("found negative value")
+		}
+
 		if node[i] == prev || node[i] == 0 {
 			continue
 		}
@@ -49,5 +67,5 @@ func findMin(node []int, prev int) (int, int) {
 			index = i
 		}
 	}
-	return index, val
+	return index, val, nil
 }
