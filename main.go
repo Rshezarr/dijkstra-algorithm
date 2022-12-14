@@ -15,7 +15,7 @@ func main() {
 		{0, 0, 0, 6, 0, 9},
 		{14, 0, 2, 0, 9, 0},
 	}
-	res, err := djk(table, 5, 0)
+	res, err := djk(table, 0, 5)
 	if err != nil {
 		log.Println(err)
 		return
@@ -27,7 +27,7 @@ func main() {
 func djk(table [][]int, start int, dest int) ([]int, error) {
 	var index int = start
 	var value int
-	var sum int
+	// var sum int
 	var path []int
 	var err error
 
@@ -36,8 +36,8 @@ func djk(table [][]int, start int, dest int) ([]int, error) {
 		if err != nil {
 			return nil, err
 		}
-		sum += value
-		path = append(path, sum)
+		// sum += value
+		path = append(path, value)
 	}
 
 	return path, nil
