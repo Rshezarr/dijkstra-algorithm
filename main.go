@@ -15,7 +15,7 @@ func main() {
 		{0, 0, 0, 6, 0, 9},
 		{14, 0, 2, 0, 9, 0},
 	}
-	res, err := djk(table, 0, 5)
+	res, err := djk(table, 5, 0)
 	if err != nil {
 		log.Println(err)
 		return
@@ -44,11 +44,11 @@ func djk(table [][]int, start int, dest int) ([]int, error) {
 }
 
 func findMinWeight(node []int, prev int) (int, int, error) {
-	index := 0
-	val := 0
+	var index int
+	var value int
 	for i, v := range node {
 		if v != prev && v != 0 {
-			val = v
+			value = v
 			index = i
 			break
 		}
@@ -62,10 +62,10 @@ func findMinWeight(node []int, prev int) (int, int, error) {
 		if node[i] == prev || node[i] == 0 {
 			continue
 		}
-		if node[i] < val {
-			val = node[i]
+		if node[i] < value {
+			value = node[i]
 			index = i
 		}
 	}
-	return index, val, nil
+	return index, value, nil
 }
