@@ -28,6 +28,7 @@ func dijkstraAlgorithm(table [][]int, start int, dest int) ([]int, error) {
 	var value int
 	var path []int
 	var err error
+
 	// Start at the starting node
 	index := start
 
