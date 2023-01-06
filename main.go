@@ -2,29 +2,9 @@ package main
 
 import (
 	"errors"
-	"fmt"
-	"log"
 )
 
-func main() {
-	table := [][]int{
-		{0, 7, 9, 0, 0, 14},
-		{7, 0, 10, 15, 0, 0},
-		{9, 10, 0, 11, 0, 2},
-		{0, 15, 11, 0, 6, 0},
-		{0, 0, 0, 6, 0, 9},
-		{14, 0, 2, 0, 9, 0},
-	}
-	res, err := dijkstraAlgorithm(table, 0, 5)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-
-	fmt.Println(res)
-}
-
-func dijkstraAlgorithm(table [][]int, start int, dest int) ([]int, error) {
+func FindShortestPath(matrix [][]int, start int, dest int) ([]int, error) {
 	var value int
 	var path []int
 	var err error
@@ -35,7 +15,7 @@ func dijkstraAlgorithm(table [][]int, start int, dest int) ([]int, error) {
 	// Loop until we reach the destination node
 	for index != dest {
 		// Find the next node with the minimum weight
-		index, value, err = findMinWeight(table[index], value)
+		index, value, err = findMinWeight(matrix[index], value)
 		if err != nil {
 			return nil, err
 		}
