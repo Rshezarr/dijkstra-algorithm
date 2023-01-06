@@ -2,9 +2,44 @@ package main
 
 import (
 	"errors"
+	"fmt"
+	"log"
 )
 
+func main() {
+	matrix := [][]int{
+		{0, 7, 9, 0, 0, 14},
+		{7, 0, 10, 15, 0, 0},
+		{9, 10, 0, 11, 0, 2},
+		{0, 15, 11, 0, 6, 0},
+		{0, 0, 0, 6, 0, 9},
+		{14, 0, 2, 0, 9, 0},
+	}
+	res, err := FindShortestPath(matrix, 0, 3)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(res)
+}
+
+func checkMatrix(matrix [][]int) error {
+	if len(matrix) == 0 {
+		return errors.New("matrix cannot be empty")
+	}
+
+	if len(matrix) != len(matrix[0]) {
+		return errors.New("invalid matrix")
+	}
+
+	return nil
+}
+
 func FindShortestPath(matrix [][]int, start int, dest int) ([]int, error) {
+	if err := checkMatrix(matrix); err != nil {
+		return nil, err
+	}
+
 	var value int
 	var path []int
 	var err error
