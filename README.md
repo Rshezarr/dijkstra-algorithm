@@ -4,7 +4,7 @@ This package contains an implementation of the Dijkstra algorithm for finding th
 
 ## Usage
 
-```
+```go
 import "github.com/user/dijkstra"
 
 // Create a 2D slice representing the graph, with the weights of the edges between the nodes.
